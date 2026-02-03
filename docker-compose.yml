@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16
+    container_name: huhems-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: newpassword123
+      POSTGRES_DB: huhems
+    ports:
+      - "5432:5432"
+    volumes:
+      - huhems_pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: huhems-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      # In Docker networking, Postgres is reachable at service name `db`.
+      DB_URL: postgres://postgres:newpassword123@db:5432/huhems?sslmode=disable
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: huhems-frontend
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  huhems_pgdata:
