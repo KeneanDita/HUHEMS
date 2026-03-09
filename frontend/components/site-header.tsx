@@ -39,7 +39,7 @@ export async function SiteHeader() {
 		<header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur">
 			<div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
 				<div className="flex items-center gap-2">
-					<Link href={links.home.href} className="font-semibold tracking-tight">
+					<Link href={links.home.href} className="font-semibold tracking-tight text-primary">
 						HUHEMS
 					</Link>
 				</div>

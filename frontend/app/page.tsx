@@ -21,8 +21,8 @@ export default async function Home() {
   return (
     <div className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-48 left-1/2 h-120 w-225 -translate-x-1/2 rounded-full bg-linear-to-r from-zinc-200/70 via-zinc-100/40 to-transparent blur-3xl dark:from-zinc-800/40 dark:via-zinc-900/20" />
-        <div className="absolute -bottom-48 right-0 h-105 w-130 rounded-full bg-linear-to-tr from-zinc-200/60 to-transparent blur-3xl dark:from-zinc-800/30" />
+        <div className="absolute -top-48 left-1/2 h-120 w-225 -translate-x-1/2 rounded-full bg-linear-to-r from-blue-200/60 via-indigo-100/40 to-transparent blur-3xl dark:from-blue-900/30 dark:via-indigo-900/20" />
+        <div className="absolute -bottom-48 right-0 h-105 w-130 rounded-full bg-linear-to-tr from-indigo-200/50 to-transparent blur-3xl dark:from-indigo-900/25" />
       </div>
 
       <section className="mx-auto max-w-3xl text-center">
@@ -31,9 +31,13 @@ export default async function Home() {
           <Badge>Holistic Exams</Badge>
         </div>
 
-        <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="mt-6 bg-linear-to-r from-foreground via-primary to-foreground bg-clip-text text-balance text-4xl font-semibold tracking-tight text-transparent sm:text-5xl">
           HUHEMS - Haramaya University Holistic Exam Management System
         </h1>
+
+        <p className="mx-auto mt-4 max-w-xl text-balance text-muted-foreground">
+          A secure, modern platform for creating, managing, and taking exams with real-time grading and analytics.
+        </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {!isLoggedIn ? (
@@ -87,10 +91,10 @@ export default async function Home() {
       </section>
 
       <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
+        <Card className="transition-all duration-200 hover:-translate-y-1">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ClockIcon className="size-4" /> Timed Exams
+              <ClockIcon className="size-4 text-primary" /> Timed Exams
             </CardTitle>
             <CardDescription>Start/end windows and attempt tracking.</CardDescription>
           </CardHeader>
@@ -99,10 +103,10 @@ export default async function Home() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="transition-all duration-200 hover:-translate-y-1">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ListChecksIcon className="size-4" /> MCQs
+              <ListChecksIcon className="size-4 text-primary" /> MCQs
             </CardTitle>
             <CardDescription>Single-choice and multi-choice grading.</CardDescription>
           </CardHeader>
@@ -111,10 +115,10 @@ export default async function Home() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="transition-all duration-200 hover:-translate-y-1">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ShieldCheckIcon className="size-4" /> Attempt Limits
+              <ShieldCheckIcon className="size-4 text-primary" /> Attempt Limits
             </CardTitle>
             <CardDescription>Reduce cheating via max attempts.</CardDescription>
           </CardHeader>
@@ -123,7 +127,7 @@ export default async function Home() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="transition-all duration-200 hover:-translate-y-1">
           <CardHeader>
             <CardTitle className="text-base">PostgreSQL</CardTitle>
             <CardDescription>Database expected on port 5432.</CardDescription>
