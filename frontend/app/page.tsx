@@ -21,29 +21,30 @@ export default async function Home() {
   return (
     <div className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-48 left-1/2 h-120 w-225 -translate-x-1/2 rounded-full bg-linear-to-r from-zinc-200/70 via-zinc-100/40 to-transparent blur-3xl dark:from-zinc-800/40 dark:via-zinc-900/20" />
-        <div className="absolute -bottom-48 right-0 h-105 w-130 rounded-full bg-linear-to-tr from-zinc-200/60 to-transparent blur-3xl dark:from-zinc-800/30" />
+        <div className="absolute -top-48 left-1/2 h-120 w-225 -translate-x-1/2 rounded-full bg-linear-to-r from-blue-200/50 via-purple-100/30 to-transparent blur-3xl dark:from-blue-900/30 dark:via-purple-900/20" />
+        <div className="absolute -bottom-48 right-0 h-105 w-130 rounded-full bg-linear-to-tr from-purple-200/40 via-pink-100/20 to-transparent blur-3xl dark:from-purple-800/25 dark:via-pink-900/15" />
+        <div className="absolute top-1/2 -left-24 h-96 w-96 -translate-y-1/2 rounded-full bg-linear-to-br from-cyan-200/30 to-transparent blur-3xl dark:from-cyan-900/20" />
       </div>
 
       <section className="mx-auto max-w-3xl text-center">
-        <div className="flex items-center justify-center gap-2">
-          <Badge variant="secondary">Haramaya University</Badge>
-          <Badge>Holistic Exams</Badge>
+        <div className="flex items-center justify-center gap-2 animate-in fade-in slide-in-from-top-4 duration-700">
+          <Badge variant="secondary" className="shadow-sm">Haramaya University</Badge>
+          <Badge className="shadow-sm">Holistic Exams</Badge>
         </div>
 
-        <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-5xl animate-in fade-in slide-in-from-top-6 duration-700 delay-150">
           HUHEMS - Haramaya University Holistic Exam Management System
         </h1>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row animate-in fade-in slide-in-from-top-8 duration-700 delay-300">
           {!isLoggedIn ? (
             <>
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="shadow-md hover:shadow-lg transition-shadow">
                 <Link href="/auth/login?role=student">
                   Login (Student) <ArrowRightIcon className="size-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline">
+              <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md transition-shadow">
                 <Link href="/auth/admin-login">
                   Login (Admin) <ArrowRightIcon className="size-4" />
                 </Link>
@@ -52,7 +53,7 @@ export default async function Home() {
           ) : null}
 
           {canGoStudent ? (
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="shadow-md hover:shadow-lg transition-shadow">
               <Link href="/student">
                 Go to Student Dashboard <ArrowRightIcon className="size-4" />
               </Link>
@@ -60,7 +61,7 @@ export default async function Home() {
           ) : null}
 
           {canGoAdmin ? (
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md transition-shadow">
               <Link href="/admin">Go to Admin Dashboard</Link>
             </Button>
           ) : null}
@@ -86,11 +87,14 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
+      <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
+        <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:border-border hover:-translate-y-1 duration-300">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ClockIcon className="size-4" /> Timed Exams
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                <ClockIcon className="size-4 text-blue-600 dark:text-blue-400" />
+              </div>
+              Timed Exams
             </CardTitle>
             <CardDescription>Start/end windows and attempt tracking.</CardDescription>
           </CardHeader>
@@ -99,10 +103,13 @@ export default async function Home() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:border-border hover:-translate-y-1 duration-300">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ListChecksIcon className="size-4" /> MCQs
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30">
+                <ListChecksIcon className="size-4 text-green-600 dark:text-green-400" />
+              </div>
+              MCQs
             </CardTitle>
             <CardDescription>Single-choice and multi-choice grading.</CardDescription>
           </CardHeader>
@@ -111,10 +118,13 @@ export default async function Home() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:border-border hover:-translate-y-1 duration-300">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ShieldCheckIcon className="size-4" /> Attempt Limits
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
+                <ShieldCheckIcon className="size-4 text-purple-600 dark:text-purple-400" />
+              </div>
+              Attempt Limits
             </CardTitle>
             <CardDescription>Reduce cheating via max attempts.</CardDescription>
           </CardHeader>
@@ -123,9 +133,14 @@ export default async function Home() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:border-border hover:-translate-y-1 duration-300">
           <CardHeader>
-            <CardTitle className="text-base">PostgreSQL</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-900/30">
+                <span className="text-sm font-bold text-orange-600 dark:text-orange-400">DB</span>
+              </div>
+              PostgreSQL
+            </CardTitle>
             <CardDescription>Database expected on port 5432.</CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">

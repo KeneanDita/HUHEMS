@@ -7,10 +7,10 @@ export default async function StudentAttemptResultPage(props: { params: Promise<
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 animate-in fade-in slide-in-from-top-4 duration-500">
         <div className="flex items-center gap-2">
-          <Badge variant="secondary">Student</Badge>
-          <Badge>Result</Badge>
+          <Badge variant="secondary" className="shadow-sm">Student</Badge>
+          <Badge className="shadow-sm">Result</Badge>
         </div>
         <div className="flex items-center gap-2">
           <BackButton fallbackHref="/student/results" size="sm">Back to Results</BackButton>

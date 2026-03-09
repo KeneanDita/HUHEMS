@@ -6,11 +6,11 @@ import { AdminStudentsClient } from "./ui";
 export default function AdminStudentsPage() {
   return (
     <div className="grid gap-6">
-      <div>
+      <div className="animate-in fade-in slide-in-from-top-4 duration-500">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Badge variant="secondary">Admin</Badge>
-            <Badge>Students</Badge>
+            <Badge variant="secondary" className="shadow-sm">Admin</Badge>
+            <Badge className="shadow-sm">Students</Badge>
           </div>
           <div className="flex items-center gap-2">
             <BackButton fallbackHref="/admin" size="sm">Back</BackButton>

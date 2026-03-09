@@ -48,9 +48,9 @@ export function LoginForm({
 
   return (
     <div className="mx-auto w-full max-w-md">
-      <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
+      <Card className="border-border/50 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent>
@@ -105,6 +105,7 @@ export function LoginForm({
                 placeholder="username or email"
                 value={usernameOrEmail}
                 onChange={(e) => setUsernameOrEmail(e.target.value)}
+                className="transition-shadow focus:shadow-sm"
               />
             </div>
             <div className="grid gap-2">
@@ -115,12 +116,17 @@ export function LoginForm({
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="transition-shadow focus:shadow-sm"
               />
             </div>
 
-            {error ? <p className="text-sm font-medium text-destructive">{error}</p> : null}
+            {error ? (
+              <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-900 dark:border-red-900/50 dark:bg-red-900/10 dark:text-red-100">
+                {error}
+              </div>
+            ) : null}
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full shadow-sm hover:shadow-md transition-shadow" disabled={isLoading}>
               {isLoading ? "Signing in..." : "Login"}
             </Button>
 
