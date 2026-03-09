@@ -29,25 +29,25 @@ export default async function StudentDashboard() {
     <div className="grid gap-6">
 		<FirstLoginChangePasswordDialog show={showFirstLogin} role="student" />
     {passwordNeverChanged ? (
-      <div className="flex items-start gap-3 rounded-md border border-yellow-200 bg-yellow-50 p-4 text-yellow-950">
-        <AlertTriangleIcon className="mt-0.5 h-5 w-5 text-yellow-600" aria-hidden="true" />
+      <div className="flex items-start gap-3 rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-yellow-950 shadow-sm dark:border-yellow-900/50 dark:bg-yellow-900/10 dark:text-yellow-100">
+        <AlertTriangleIcon className="mt-0.5 h-5 w-5 text-yellow-600 dark:text-yellow-500" aria-hidden="true" />
         <div className="grid gap-1">
-          <div className="text-sm font-medium">You haven’t changed your password yet.</div>
-          <div className="text-sm text-yellow-900/80">
+          <div className="text-sm font-medium">You haven't changed your password yet.</div>
+          <div className="text-sm text-yellow-900/80 dark:text-yellow-100/80">
             For security, please change your password.
             {" "}
-            <Button asChild variant="link" className="h-auto p-0 align-baseline text-yellow-900">
+            <Button asChild variant="link" className="h-auto p-0 align-baseline text-yellow-900 dark:text-yellow-100">
               <Link href="/student/password">Change password</Link>
             </Button>
           </div>
         </div>
       </div>
     ) : null}
-      <div>
+      <div className="animate-in fade-in slide-in-from-top-4 duration-500">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Badge variant="secondary">Student</Badge>
-            <Badge>Dashboard</Badge>
+            <Badge variant="secondary" className="shadow-sm">Student</Badge>
+            <Badge className="shadow-sm">Dashboard</Badge>
           </div>
         </div>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight">Student Dashboard</h1>

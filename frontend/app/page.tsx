@@ -26,9 +26,9 @@ export default async function Home() {
       </div>
 
       <section className="mx-auto max-w-3xl text-center">
-        <div className="flex items-center justify-center gap-2">
-          <Badge variant="secondary">Haramaya University</Badge>
-          <Badge>Holistic Exams</Badge>
+        <div className="flex items-center justify-center gap-2 animate-in fade-in slide-in-from-top-4 duration-700">
+          <Badge variant="secondary" className="shadow-sm">Haramaya University</Badge>
+          <Badge className="shadow-sm">Holistic Exams</Badge>
         </div>
 
         <h1 className="mt-6 bg-linear-to-r from-foreground via-primary to-foreground bg-clip-text text-balance text-4xl font-semibold tracking-tight text-transparent sm:text-5xl">
@@ -42,12 +42,12 @@ export default async function Home() {
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {!isLoggedIn ? (
             <>
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="shadow-md hover:shadow-lg transition-shadow">
                 <Link href="/auth/login?role=student">
                   Login (Student) <ArrowRightIcon className="size-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline">
+              <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md transition-shadow">
                 <Link href="/auth/admin-login">
                   Login (Admin) <ArrowRightIcon className="size-4" />
                 </Link>
@@ -56,7 +56,7 @@ export default async function Home() {
           ) : null}
 
           {canGoStudent ? (
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="shadow-md hover:shadow-lg transition-shadow">
               <Link href="/student">
                 Go to Student Dashboard <ArrowRightIcon className="size-4" />
               </Link>
@@ -64,7 +64,7 @@ export default async function Home() {
           ) : null}
 
           {canGoAdmin ? (
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md transition-shadow">
               <Link href="/admin">Go to Admin Dashboard</Link>
             </Button>
           ) : null}
@@ -129,7 +129,12 @@ export default async function Home() {
 
         <Card className="transition-all duration-200 hover:-translate-y-1">
           <CardHeader>
-            <CardTitle className="text-base">PostgreSQL</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-900/30">
+                <span className="text-sm font-bold text-orange-600 dark:text-orange-400">DB</span>
+              </div>
+              PostgreSQL
+            </CardTitle>
             <CardDescription>Database expected on port 5432.</CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
