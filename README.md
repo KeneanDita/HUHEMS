@@ -1,8 +1,19 @@
-# HUHEMS - Hayamaya University Holistic Exam Management  System
+<div align="center">
+
+# HUHEMS - Hayamaya University Holistic Exam Management System
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Go Version](https://img.shields.io/badge/Go-1.25.5-00ADD8?logo=go&logoColor=white)](https://go.dev/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.1.6-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
 HUHEMS is a full-stack exam management system for Haramaya University. It supports admin-managed exams and question banks, student exam attempts with time limits, and reporting/analytics.
 
 Author : [Kenean Dita](https://www.github.com/keneandita)
+
+</div>
 
 ## Monorepo layout
 
