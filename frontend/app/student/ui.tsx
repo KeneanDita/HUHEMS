@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { ClockIcon, LayersIcon, BookOpenIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -125,70 +126,92 @@ export function StudentDashboardClient() {
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm text-muted-foreground">
-          {loading ? "Loading..." : `${publishedCount} published exams`}
-        </div>
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
+        <p className="text-sm text-muted-foreground">
+          {loading ? "Loading exams…" : `${publishedCount} published exam${publishedCount !== 1 ? "s" : ""}`}
+        </p>
         <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => router.push("/student/results")}>My Results</Button>
-          <Button variant="outline" onClick={() => void load()} disabled={loading}>
+          <Button variant="outline" size="sm" onClick={() => router.push("/student/results")}>
+            My Results
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => void load()} disabled={loading}>
             Refresh
           </Button>
         </div>
       </div>
 
+      {/* Error */}
       {loadError ? (
-        <Card>
+        <Card className="border-destructive/40 bg-destructive/5">
           <CardHeader>
-            <CardTitle>Couldn’t load exams</CardTitle>
+            <CardTitle className="text-destructive text-base">Couldn&apos;t load exams</CardTitle>
             <CardDescription>{loadError}</CardDescription>
           </CardHeader>
         </Card>
       ) : null}
 
+      {/* Exam list */}
       <div className="grid gap-4">
         {exams.map((exam) => (
-          <Card key={exam.id}>
-            <CardHeader>
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <CardTitle className="text-xl">{exam.title}</CardTitle>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">{exam.questionCount} Q</Badge>
-                  <Badge variant="secondary">{exam.maxAttempts} attempt(s)</Badge>
-                  <Badge variant="secondary">{exam.durationMinutes} min</Badge>
-                </div>
-              </div>
-              {exam.description ? <CardDescription>{exam.description}</CardDescription> : null}
+          <Card key={exam.id} className="overflow-hidden transition-all duration-200 hover:shadow-md">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg leading-snug">{exam.title}</CardTitle>
+              {exam.description ? (
+                <CardDescription className="mt-1 text-sm leading-relaxed">{exam.description}</CardDescription>
+              ) : null}
             </CardHeader>
-            <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-muted-foreground">
-                Questions/page: <span className="text-foreground">{exam.questionsPerPage}</span>
+
+            <CardContent className="pt-0">
+              {/* Stats row */}
+              <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <BookOpenIcon className="size-3.5 text-primary/70" />
+                  <span>{exam.questionCount} questions</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <ClockIcon className="size-3.5 text-primary/70" />
+                  <span>{exam.durationMinutes} min</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <LayersIcon className="size-3.5 text-primary/70" />
+                  <span>{exam.maxAttempts} attempt{exam.maxAttempts !== 1 ? "s" : ""} allowed</span>
+                </span>
+                <Badge variant="secondary" className="ml-auto text-xs">
+                  {exam.questionsPerPage} per page
+                </Badge>
               </div>
-              <Button
-                onClick={() => {
-                  setRulesExam(exam);
-                  setRulesAgreed(false);
-                  setStartError(null);
-                  setRulesOpen(true);
-                }}
-                disabled={startingId === exam.id}
-              >
-                {startingId === exam.id ? "Starting..." : "Take Exam"}
-              </Button>
+
+              {/* Action */}
+              <div className="flex justify-end">
+                <Button
+                  onClick={() => {
+                    setRulesExam(exam);
+                    setRulesAgreed(false);
+                    setStartError(null);
+                    setRulesOpen(true);
+                  }}
+                  disabled={startingId === exam.id}
+                  className="shadow-sm hover:shadow-md transition-shadow"
+                >
+                  {startingId === exam.id ? "Starting…" : "Take Exam"}
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))}
 
         {!loading && !loadError && exams.length === 0 ? (
-          <Card>
-            <CardHeader>
-              <CardTitle>No published exams</CardTitle>
+          <Card className="border-dashed">
+            <CardHeader className="py-10 text-center">
+              <CardTitle className="text-base text-muted-foreground">No published exams yet</CardTitle>
               <CardDescription>Ask your admin to publish an exam.</CardDescription>
             </CardHeader>
           </Card>
         ) : null}
       </div>
 
+      {/* Rules dialog */}
       <AlertDialog
         open={rulesOpen}
         onOpenChange={(nextOpen) => {
@@ -204,7 +227,7 @@ export function StudentDashboardClient() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Exam Rules & Instructions</AlertDialogTitle>
+            <AlertDialogTitle>Exam Rules &amp; Instructions</AlertDialogTitle>
             <AlertDialogDescription>
               Please read the following rules carefully before starting the exam.
             </AlertDialogDescription>
@@ -234,7 +257,7 @@ export function StudentDashboardClient() {
                   when the time expires.
                 </li>
               </ul>
-              <p className="mt-3 text-muted-foreground">Click “Start Exam” to agree to the rules and begin.</p>
+              <p className="mt-3 text-muted-foreground">Click &quot;Start Exam&quot; to agree to the rules and begin.</p>
             </div>
 
             <div className="flex items-start gap-3 rounded-md border p-3">
@@ -270,7 +293,7 @@ export function StudentDashboardClient() {
                   void startExamAttempt(rulesExam.id);
                 }}
               >
-                {startingId ? "Starting..." : "Start Exam"}
+                {startingId ? "Starting…" : "Start Exam"}
               </Button>
             </AlertDialogAction>
           </AlertDialogFooter>
