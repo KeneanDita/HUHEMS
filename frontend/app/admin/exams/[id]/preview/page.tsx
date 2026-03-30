@@ -95,8 +95,8 @@ export default async function AdminExamPreviewPage(props: { params: Promise<{ id
   }
 
   return (
-    <div className="grid gap-6">
-      <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+    <div className="grid gap-8">
+      <div className="animate-in fade-in slide-in-from-top-4 duration-500 border-b pb-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="shadow-sm">Admin</Badge>
@@ -104,11 +104,13 @@ export default async function AdminExamPreviewPage(props: { params: Promise<{ id
           </div>
           <div className="flex items-center gap-2">
             <BackButton fallbackHref={`/admin/exams/${id}`} size="sm">Back</BackButton>
-            <Button asChild variant="outline" size="sm"><Link href={`/admin/exams/${id}`}>Edit</Link></Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href={`/admin/exams/${id}`}>Edit</Link>
+            </Button>
           </div>
         </div>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight">{data.exam.title}</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">Student-style preview (read-only).</p>
+        <p className="mt-2 max-w-xl text-sm text-muted-foreground">Read-only student-style preview of this exam.</p>
       </div>
 
       <AdminExamPreviewClient initial={data} />
