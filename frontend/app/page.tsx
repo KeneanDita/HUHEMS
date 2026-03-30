@@ -27,25 +27,25 @@ export default async function Home() {
       </div>
 
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-3xl py-20 sm:py-28 text-center animate-in fade-in slide-in-from-top-4 duration-700">
+      <section className="mx-auto max-w-3xl py-20 sm:py-32 text-center animate-in fade-in slide-in-from-top-4 duration-700">
         <div className="flex items-center justify-center gap-2">
           <Badge variant="secondary" className="shadow-sm">Haramaya University</Badge>
           <Badge className="shadow-sm">Holistic Exams</Badge>
         </div>
 
-        <h1 className="mt-8 bg-linear-to-r from-foreground via-primary to-foreground bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-6xl">
+        <h1 className="mt-10 bg-linear-to-r from-foreground via-primary to-foreground bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
           HUHEMS
         </h1>
-        <p className="mt-3 text-base font-medium text-muted-foreground sm:text-lg">
+        <p className="mt-5 text-base font-medium text-muted-foreground sm:text-lg">
           Haramaya University Holistic Exam Management System
         </p>
 
-        <p className="mx-auto mt-5 max-w-lg text-balance text-sm text-muted-foreground sm:text-base">
+        <p className="mx-auto mt-6 max-w-lg text-balance text-sm leading-relaxed text-muted-foreground sm:text-base">
           A secure, modern platform for creating, managing, and taking exams with
           real-time grading and analytics.
         </p>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {!isLoggedIn ? (
             <>
               <Button asChild size="lg" className="shadow-md hover:shadow-lg transition-shadow">
@@ -98,7 +98,7 @@ export default async function Home() {
         {/* Scroll-to-features hint */}
         <a
           href="#features"
-          className="mt-16 inline-flex flex-col items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          className="mt-20 inline-flex flex-col items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
           aria-label="Scroll to features"
         >
           <span className="tracking-wide uppercase">Explore features</span>
