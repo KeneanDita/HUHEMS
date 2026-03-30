@@ -39,7 +39,7 @@ function normalizeResult(raw: unknown): ResultListItem {
 }
 
 function formatDateTime(value: string | null): string {
-  if (!value) return "";
+  if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return value;
   return d.toLocaleString();
@@ -86,61 +86,61 @@ export function StudentResultsClient() {
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">My Results</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {loading ? "Loading..." : `${count} submitted attempt(s)`}
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button asChild variant="outline">
-            <Link href="/student">Dashboard</Link>
-          </Button>
-          <Button variant="outline" onClick={() => void load()} disabled={loading}>
-            Refresh
-          </Button>
-        </div>
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
+        <p className="text-sm text-muted-foreground">
+          {loading ? "Loading results…" : `${count} submitted attempt${count !== 1 ? "s" : ""}`}
+        </p>
+        <Button variant="outline" size="sm" onClick={() => void load()} disabled={loading}>
+          Refresh
+        </Button>
       </div>
 
+      {/* Error */}
       {error ? (
-        <Card>
+        <Card className="border-destructive/40 bg-destructive/5">
           <CardHeader>
-            <CardTitle>Couldn’t load results</CardTitle>
+            <CardTitle className="text-destructive text-base">Couldn&apos;t load results</CardTitle>
             <CardDescription>{error}</CardDescription>
           </CardHeader>
         </Card>
       ) : null}
 
+      {/* Results list */}
       <div className="grid gap-4">
         {items.map((r) => (
-          <Card key={r.attemptId}>
-            <CardHeader>
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <CardTitle className="text-xl">{r.examTitle || "Exam"}</CardTitle>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">{Number.isFinite(r.score) ? `${r.score.toFixed(1)}%` : "0%"}</Badge>
-                </div>
+          <Card key={r.attemptId} className="overflow-hidden transition-all duration-200 hover:shadow-md">
+            <CardHeader className="pb-3">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <CardTitle className="text-lg leading-snug">{r.examTitle || "Exam"}</CardTitle>
+                <Badge
+                  variant={Number.isFinite(r.score) && r.score >= 50 ? "default" : "secondary"}
+                  className="shrink-0 text-sm tabular-nums"
+                >
+                  {Number.isFinite(r.score) ? `${r.score.toFixed(1)}%` : "0%"}
+                </Badge>
               </div>
-              <CardDescription>
+              <CardDescription className="mt-1 text-xs">
                 Submitted: <span className="text-foreground">{formatDateTime(r.endTime)}</span>
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-muted-foreground">
+            <CardContent className="pt-0">
+              <div className="mb-3 text-xs text-muted-foreground">
                 Started: <span className="text-foreground">{formatDateTime(r.startTime)}</span>
               </div>
-              <Button asChild>
-                <Link href={`/student/attempts/${r.attemptId}/result`}>View Details</Link>
-              </Button>
+              <div className="flex justify-end">
+                <Button asChild size="sm" className="shadow-sm hover:shadow-md transition-shadow">
+                  <Link href={`/student/attempts/${r.attemptId}/result`}>View Details</Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))}
 
         {!loading && !error && items.length === 0 ? (
-          <Card>
-            <CardHeader>
-              <CardTitle>No results yet</CardTitle>
+          <Card className="border-dashed">
+            <CardHeader className="py-10 text-center">
+              <CardTitle className="text-base text-muted-foreground">No results yet</CardTitle>
               <CardDescription>Submit an exam attempt and it will appear here.</CardDescription>
             </CardHeader>
           </Card>
